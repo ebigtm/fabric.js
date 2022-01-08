@@ -428,11 +428,11 @@
     activeSel.toCanvasElement();
 
     assert.equal(cObj.canvas, canvas, 'canvas is the main one step 2');
-    
-    activeSel.removeAll();
+
+    activeSel.destroy();
 
     assert.equal(cObj.canvas, canvas, 'canvas is the main one step 3');
-    
+
   });
 
   QUnit.test('toCanvasElement does not modify oCoords on zoomed canvas', function(assert) {
@@ -1204,28 +1204,5 @@
     assert.equal(object.hasFill(), false, 'without a color, hasFill is false');
     object.fill = 'transparent';
     assert.equal(object.hasFill(), false, 'with a color that is transparent, hasFill is true');
-  });
-
-  QUnit.test('isDescendantOf', function (assert) {
-    var object = new fabric.Object();
-    var parent = new fabric.Object();
-    var canvas = new fabric.Object();
-    parent.canvas = canvas;
-    object.parent = parent;
-    assert.ok(object.isDescendantOf(parent));
-    object.parent = {
-      parent
-    }
-    assert.ok(object.isDescendantOf(parent));
-    object.parent = {
-      group: parent
-    }
-    assert.ok(object.isDescendantOf(parent));
-    assert.ok(object.isDescendantOf(canvas));
-    object.parent = undefined;
-    assert.ok(object.isDescendantOf(parent) === false);
-    assert.ok(object.isDescendantOf(canvas) === false);
-    object.canvas = canvas;
-    assert.ok(object.isDescendantOf(canvas));
   });
 })();
