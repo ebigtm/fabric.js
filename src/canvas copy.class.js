@@ -1148,7 +1148,7 @@
      * @return {Boolean} true if the selection happened
      */
     _setActiveObject: function (object, e) {
-      var isCollection = object.type == 'iCollection', activeObject = this._activeObject;
+      var isCollection = Array.isArray(object._objects), activeObject = this._activeObject;
       if (this._activeObject === object && !isCollection) {
         return false;
       }
@@ -1159,10 +1159,6 @@
       if (object.onSelect({ e: e })) {
         return false;
       }
-      if (object.isMoving) {
-        return false;
-      }
-      console.log(object.isMoving);
       var subTargets;
       if (e) {
         //  prepare subTargets
